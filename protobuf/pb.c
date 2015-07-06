@@ -437,7 +437,7 @@ static int iostring_clear(lua_State* L)
     return 0;
 }
 
-static const struct luaL_reg _pb [] = {
+static const struct luaL_Reg _pb [] = {
     {"varint_encoder", varint_encoder},
     {"signed_varint_encoder", signed_varint_encoder},
     {"read_tag", read_tag},
@@ -453,7 +453,7 @@ static const struct luaL_reg _pb [] = {
     {NULL, NULL}
 };
 
-static const struct luaL_reg _c_iostring_m [] = {
+static const struct luaL_Reg _c_iostring_m [] = {
     {"__tostring", iostring_str},
     {"__len", iostring_len},
     {"write", iostring_write},
@@ -467,8 +467,12 @@ int luaopen_pb (lua_State *L)
     luaL_newmetatable(L, IOSTRING_META);
     lua_pushvalue(L, -1);
     lua_setfield(L, -2, "__index");
-    luaL_register(L, NULL, _c_iostring_m);
+    luaL_setfuncs(L, _c_iostring_m, 0);
 
-    luaL_register(L, "pb", _pb);
+    lua_newtable(L);
+    luaL_setfuncs(L, _pb, 0);
+    lua_pushvalue(L, -1);
+    lua_setglobal(L, "pb");
+
     return 1;
-} 
+}
