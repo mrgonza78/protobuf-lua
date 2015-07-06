@@ -210,7 +210,7 @@ static size_t size_varint(const char* buffer, size_t len)
     size_t pos = 0;
     while(buffer[pos] & 0x80){
         ++pos;
-        if(pos > len){
+        if(pos >= len){
             return -1;
         }
     }
