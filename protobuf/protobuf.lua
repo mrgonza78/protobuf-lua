@@ -749,7 +749,7 @@ local function _AddIsInitializedMethod(message_descriptor, message_meta)
 
         for _,field in ipairs(required_fields) do
             if not message_meta._member.HasField(self, field.name) then
-                errors.append(field.name) 
+                table.insert(errors, field.name)
             end
         end
 
