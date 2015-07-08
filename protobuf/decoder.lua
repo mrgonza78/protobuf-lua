@@ -22,10 +22,10 @@ local ipairs = ipairs
 local error = error
 local print = print
 
-local pb = require "pb"
-local encoder = require "encoder"
-local wire_format = require "wire_format"
-module "decoder"
+local pb = require "protobuf.pb"
+local encoder = require "protobuf.encoder"
+local wire_format = require "protobuf.wire_format"
+module "protobuf.decoder"
 
 local _DecodeVarint = pb.varint_decoder
 local _DecodeSignedVarint = pb.signed_varint_decoder

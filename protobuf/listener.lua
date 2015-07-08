@@ -17,7 +17,7 @@
 --
 local setmetatable = setmetatable
 
-module "listener"
+module "protobuf.listener"
 
 local _null_listener = {
     Modified = function()

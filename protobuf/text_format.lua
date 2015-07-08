@@ -22,9 +22,9 @@ local table = table
 local ipairs = ipairs
 local tostring = tostring
 
-local descriptor = require "descriptor"
+local descriptor = require "protobuf.descriptor"
 
-module "text_format"
+module "protobuf.text_format"
 
 function format(buffer)
     local len = string.len( buffer )	

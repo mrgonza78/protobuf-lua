@@ -23,21 +23,21 @@ local error = error
 local ipairs = ipairs
 local pairs = pairs
 local print = print
-local table = table 
+local table = table
 local string = string
 local tostring = tostring
 local type = type
 
-local pb = require "pb"
-local wire_format = require "wire_format"
-local type_checkers = require "type_checkers"
-local encoder = require "encoder"
-local decoder = require "decoder"
-local listener_mod = require "listener"
-local containers = require "containers"
-local descriptor = require "descriptor"
+local pb = require "protobuf.pb"
+local wire_format = require "protobuf.wire_format"
+local type_checkers = require "protobuf.type_checkers"
+local encoder = require "protobuf.encoder"
+local decoder = require "protobuf.decoder"
+local listener_mod = require "protobuf.listener"
+local containers = require "protobuf.containers"
+local descriptor = require "protobuf.descriptor"
 local FieldDescriptor = descriptor.FieldDescriptor
-local text_format = require "text_format"
+local text_format = require "protobuf.text_format"
 
 module("protobuf")
 
