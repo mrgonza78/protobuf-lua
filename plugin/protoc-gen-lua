@@ -399,9 +399,11 @@ def code_gen_file(proto_file, env, is_gen):
 
     for enum_desc in proto_file.enum_type:
         code_gen_enum(enum_desc, env)
+        env.message.append('module.%s = {}\n' % enum_desc.name)
         for enum_value in enum_desc.value:
-            env.message.append('%s = %d\n' % (enum_value.name,
-                                              enum_value.number))
+            env.message.append('module.%s.%s = %d\n' % (enum_desc.name,
+                                                        enum_value.name,
+                                                        enum_value.number))
 
     for msg_desc in proto_file.message_type:
         code_gen_message(msg_desc, env)
