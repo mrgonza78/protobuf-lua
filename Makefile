@@ -14,6 +14,7 @@ build: rockspec
 	mkdir -p $(BUILDDIR)/$(NAME)
 	mkdir -p $(BUILDDIR)/$(NAME)/lua/protobuf
 	mkdir -p $(BUILDDIR)/$(NAME)/src
+	cp README.md LICENSE $(BUILDDIR)/$(NAME)/
 	cp -R protobuf/*.lua $(BUILDDIR)/$(NAME)/lua/protobuf/
 	cp -R protobuf/*.c $(BUILDDIR)/$(NAME)/src/
 	cp -R protoc-plugin $(BUILDDIR)/$(NAME)/
