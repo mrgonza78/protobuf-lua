@@ -1,7 +1,7 @@
 package = "protobuf"
 version = "%VERSION%-0"
 source = {
-  url = "file:///home/alex/workspaces/ksp/protobuf/build/protobuf-%VERSION%-0.tar.gz"
+  url = "https://github.com/djungelorm/protobuf-lua/releases/download/v%VERSION%/protobuf-%VERSION%-0.tar.gz"
 }
 description = {
   summary = "protobuf library and compiler plugin",
