@@ -10,7 +10,7 @@ Using luarocks by running: ```luarocks install protobuf```
 
 Make a link to the protoc plugin, for example:
 
-```ln -s /usr/local/lib/luarocks/rocks/protobuf/1.0.0-0/protoc-plugin/protoc-gen-lua /usr/bin/local/```
+```ln -s /usr/local/lib/luarocks/rocks/protobuf/1.0.0-0/protoc-plugin/protoc-gen-lua /usr/local/bin/```
 
 proto files can then be compiled using: ```protoc --lua_out=./ foo.proto```
 
