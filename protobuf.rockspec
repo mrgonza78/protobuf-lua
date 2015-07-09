@@ -5,7 +5,7 @@ source = {
 }
 description = {
   summary = "protobuf library and compiler plugin",
-  homepage = "https://github.com/djungelorm/protobuf",
+  homepage = "https://github.com/djungelorm/protobuf-lua",
   license = "MIT"
 }
 dependencies = {
