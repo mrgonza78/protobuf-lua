@@ -1,9 +1,6 @@
-package.path = package.path .. ';../protobuf/?.lua'
-package.cpath = package.cpath .. ';../protobuf/?.so'
-
 require 'person_pb'
 
-local person= person_pb.Person()
+local person = person_pb.Person()
 person.id = 1000
 person.name = "Alice"
 person.email = "Alice@example.com"
