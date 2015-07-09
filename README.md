@@ -2,7 +2,7 @@ protobuf-lua
 ============
 
 Lua library for Google's [Protocol Buffers](http://code.google.com/p/protobuf/).
-This is a fork of from https://github.com/sean-lin/protoc-gen-lua
+This is a fork of https://github.com/sean-lin/protoc-gen-lua
 
 ## Installation and Usage
 
