@@ -1,62 +1,16 @@
-protoc-gen-lua
-==============
+protobuf-lua
+============
 
-Google's Protocol Buffers project, ported to Lua
+Lua library for Google's [Protocol Buffers](http://code.google.com/p/protobuf/).
+This is a fork of from https://github.com/sean-lin/protoc-gen-lua
 
-"[Protocol Buffers](http://code.google.com/p/protobuf/)" is a binary serialization format and technology, released to the open source community by Google in 2008.
+## Installation and Usage
 
-There are various implementations of Protocol Buffers and this is for Lua.
+Using luarocks by running ```luarocks install protobuf```
 
-## Install
+Make a link to the protoc plugin, for example:
+```ln -s /usr/local/lib/luarocks/rocks/protobuf/1.0.0-0/protoc-plugin/protoc-gen-lua /usr/bin/local/```
 
-Install python runtime and the protobuf 2.3 for python.
+proto files can then be compiled using ```protoc --lua_out=./ foo.proto```
 
-checkout the code.
-
-Compile the C code:
-
-`$cd protobuf  && make`
-
-Make a link to protoc-gen-lua  in your $PATH:
-
-`$cd /usr/local/bin && sudo ln -s /path/to/protoc-gen-lua/plugin/protoc-gen-lua`
-
-Then you can compile the .proto like this:
-
-`protoc --lua_out=./ foo.proto`
-
-
-## Quick Example
-You write a .proto file like this:
-
-person.proto :
-```
-  message Person {
-    required int32 id = 1;
-    required string name = 2;
-    optional string email = 3;
-  }
-```
-
-Then you compile it.
-
-Then,  make sure that protobuf/ in package.cpath and package.path,  you use that code like this:
-
-```
-require "person_pb"
-
--- Serialize Example
-local msg = person_pb.Person()
-msg.id = 100
-msg.name = "foo"
-msg.email = "bar"
-local pb_data = msg:SerializeToString()
-
--- Parse Example
-local msg = person_pb.Person()
-msg:ParseFromString(pb_data)
-print(msg.id, msg.name, msg.email)
-```
-
-The API of this library is similar the protobuf library for python.
-For a more complete example,  read the [python documentation](http://code.google.com/apis/protocolbuffers/docs/pythontutorial.html).
+The API is similar to Google's protobuf python library. An example can be found in the example directory.
