@@ -26,7 +26,7 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
-#ifdef _ALLBSD_SOURCE
+#if defined(_ALLBSD_SOURCE) || defined(__APPLE__)
 #include <machine/endian.h>
 #else
 #include <endian.h>
