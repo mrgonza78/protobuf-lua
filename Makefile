@@ -1,6 +1,6 @@
 .PHONY: all rockspec build clean
 
-VERSION=1.1.1
+VERSION=1.1.2
 BUILDDIR = build
 NAME = protobuf-$(VERSION)-0
 
