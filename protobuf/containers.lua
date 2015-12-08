@@ -21,7 +21,8 @@ local table = table
 local rawset = rawset
 local error = error
 
-module "protobuf.containers"
+-- @module protobuf.containers
+local containers = {}
 
 local _RCFC_meta = {
   add = function(self)
@@ -47,7 +48,7 @@ local _RCFC_meta = {
 }
 _RCFC_meta.__index = _RCFC_meta
 
-function RepeatedCompositeFieldContainer(listener, message_descriptor)
+function containers.RepeatedCompositeFieldContainer(listener, message_descriptor)
   local o = {
     _listener = listener,
     _message_descriptor = message_descriptor
@@ -71,9 +72,12 @@ local _RSFC_meta = {
 }
 _RSFC_meta.__index = _RSFC_meta
 
-function RepeatedScalarFieldContainer(listener, type_checker)
+function containers.RepeatedScalarFieldContainer(listener, type_checker)
   local o = {}
   o._listener = listener
   o._type_checker = type_checker
   return setmetatable(o, _RSFC_meta)
 end
+
+return containers
+

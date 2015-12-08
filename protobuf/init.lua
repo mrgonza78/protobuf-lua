@@ -16,6 +16,7 @@
 --------------------------------------------------------------------------------
 --
 
+
 local setmetatable = setmetatable
 local rawset = rawset
 local rawget = rawget
@@ -39,7 +40,7 @@ local descriptor = require "protobuf.descriptor"
 local FieldDescriptor = descriptor.FieldDescriptor
 local text_format = require "protobuf.text_format"
 
-module "protobuf"
+local module = {}
 
 local function make_descriptor(name, descriptor, usable_key)
   local meta = {
@@ -56,7 +57,7 @@ local function make_descriptor(name, descriptor, usable_key)
     return setmetatable({}, meta)
   end
 
-  _M[name] = setmetatable(descriptor, meta);
+  module[name] = setmetatable(descriptor, meta);
 end
 
 make_descriptor("Descriptor", {}, {
@@ -297,6 +298,7 @@ local function _AttachFieldHelpers(message_meta, field_descriptor)
   local is_repeated = (field_descriptor.label == FieldDescriptor.LABEL_REPEATED)
   local is_packed = (field_descriptor.has_options and field_descriptor.GetOptions().packed)
 
+  local hohans = TYPE_TO_ENCODER[field_descriptor.type]
   rawset(field_descriptor, "_encoder", TYPE_TO_ENCODER[field_descriptor.type](field_descriptor.number, is_repeated, is_packed))
   rawset(field_descriptor, "_sizer", TYPE_TO_SIZER[field_descriptor.type](field_descriptor.number, is_repeated, is_packed))
   rawset(field_descriptor, "_default_constructor", _DefaultValueConstructorForField(field_descriptor))
@@ -912,4 +914,6 @@ local function Message(descriptor)
   return ns
 end
 
-_M.Message = Message
+module.Message = Message
+
+return module
