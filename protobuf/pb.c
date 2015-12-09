@@ -158,13 +158,12 @@ static int pack_fixed64(lua_State *L, uint8_t* value){
 static int struct_pack(lua_State *L)
 {
     uint8_t format = luaL_checkinteger(L, 2);
-    lua_Number fValue = luaL_checknumber(L, 3);
-    lua_settop(L, 1);
 
     switch(format){
         case 'i':
             {
                 lua_Integer iValue = luaL_checkinteger(L, 3);
+                lua_settop(L, 1);
                 int32_t v = (int32_t)iValue;
                 pack_fixed32(L, (uint8_t*)&v);
                 break;
@@ -172,25 +171,31 @@ static int struct_pack(lua_State *L)
         case 'q':
             {
                 lua_Integer iValue = luaL_checkinteger(L, 3);
+                lua_settop(L, 1);
                 int64_t v = (int64_t)iValue;
                 pack_fixed64(L, (uint8_t*)&v);
                 break;
             }
         case 'f':
             {
+                lua_Number fValue = luaL_checknumber(L, 3);
                 float v = (float)fValue;
+                lua_settop(L, 1);
                 pack_fixed32(L, (uint8_t*)&v);
                 break;
             }
         case 'd':
             {
+                lua_Number fValue = luaL_checknumber(L, 3);
                 double v = (double)fValue;
+                lua_settop(L, 1);
                 pack_fixed64(L, (uint8_t*)&v);
                 break;
             }
         case 'I':
             {
                 lua_Integer iValue = luaL_checkinteger(L, 3);
+                lua_settop(L, 1);
                 uint32_t v = (uint32_t)iValue;
                 pack_fixed32(L, (uint8_t*)&v);
                 break;
@@ -198,6 +203,7 @@ static int struct_pack(lua_State *L)
         case 'Q':
             {
                 lua_Integer iValue = luaL_checkinteger(L, 3);
+                lua_settop(L, 1);
                 uint64_t v = (uint64_t) iValue;
                 pack_fixed64(L, (uint8_t*)&v);
                 break;
