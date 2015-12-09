@@ -330,7 +330,7 @@ encoder.Int64Encoder = encoder.Int32Encoder
 encoder.EnumEncoder = encoder.Int32Encoder
 
 encoder.UInt32Encoder = _SimpleEncoder(wire_format.WIRETYPE_VARINT, _EncodeVarint, _VarintSize)
-encoder.UInt64Encoder = UInt32Encoder
+encoder.UInt64Encoder = encoder.UInt32Encoder
 
 encoder.SInt32Encoder = _ModifiedEncoder(
   wire_format.WIRETYPE_VARINT, _EncodeVarint, _VarintSize,

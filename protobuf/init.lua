@@ -138,9 +138,9 @@ local NON_PACKABLE_TYPES = {
 
 local _VALUE_CHECKERS = {
   [FieldDescriptor.CPPTYPE_INT32] = type_checkers.Int32ValueChecker(),
-  [FieldDescriptor.CPPTYPE_INT64] = type_checkers.Int32ValueChecker(),
+  [FieldDescriptor.CPPTYPE_INT64] = type_checkers.Int64ValueChecker(),
   [FieldDescriptor.CPPTYPE_UINT32] = type_checkers.Uint32ValueChecker(),
-  [FieldDescriptor.CPPTYPE_UINT64] = type_checkers.Uint32ValueChecker(),
+  [FieldDescriptor.CPPTYPE_UINT64] = type_checkers.Uint64ValueChecker(),
   [FieldDescriptor.CPPTYPE_DOUBLE] = type_checkers.TypeChecker({number = true}),
   [FieldDescriptor.CPPTYPE_FLOAT] = type_checkers.TypeChecker({number = true}),
   [FieldDescriptor.CPPTYPE_BOOL] = type_checkers.TypeChecker({boolean = true, bool = true, int=true}),
@@ -298,7 +298,6 @@ local function _AttachFieldHelpers(message_meta, field_descriptor)
   local is_repeated = (field_descriptor.label == FieldDescriptor.LABEL_REPEATED)
   local is_packed = (field_descriptor.has_options and field_descriptor.GetOptions().packed)
 
-  local hohans = TYPE_TO_ENCODER[field_descriptor.type]
   rawset(field_descriptor, "_encoder", TYPE_TO_ENCODER[field_descriptor.type](field_descriptor.number, is_repeated, is_packed))
   rawset(field_descriptor, "_sizer", TYPE_TO_SIZER[field_descriptor.type](field_descriptor.number, is_repeated, is_packed))
   rawset(field_descriptor, "_default_constructor", _DefaultValueConstructorForField(field_descriptor))
