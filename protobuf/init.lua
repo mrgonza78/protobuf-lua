@@ -364,7 +364,7 @@ local function _AddPropertiesForNonRepeatedCompositeField(field, message_meta)
     return field_value
   end
   message_meta._setter[property_name] = function(self, new_value)
-    error('Assignment not allowed to composite field' .. property_name .. 'in protocol message object.' )
+    error('Assignment not allowed to composite field ' .. property_name .. 'in protocol message object.' )
   end
 end
 
