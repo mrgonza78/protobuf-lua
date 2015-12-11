@@ -23,7 +23,7 @@ local ipairs = ipairs
 local error = error
 local print = print
 
-local pb = require "protobuf.pb"
+local struct = require "protobuf.struct"
 local encoder = require "protobuf.encoder"
 local wire_format = require "protobuf.wire_format"
 
@@ -109,11 +109,9 @@ local function _ModifiedDecoder(wire_type, decode_value, modify_value)
 end
 
 local function _StructPackDecoder(wire_type, value_size, format)
-  local struct_unpack = pb.struct_unpack
-
   function InnerDecode(buffer, pos)
     local new_pos = pos + value_size
-    local result = struct_unpack(format, buffer, pos)
+    local result = struct.unpack(format, buffer, pos)
     return result, new_pos
   end
   return _SimpleDecoder(wire_type, InnerDecode)
