@@ -12,5 +12,5 @@ build: rockspec
 	luarocks pack protobuf-$(VERSION)-0.rockspec
 
 clean:
-	rm *.rockspec *.rock src/pb.o src/pb.so
+	rm -f *.rockspec *.rock src/pb.o src/pb.so
 	find . -name "*.pyc" -exec rm -rf {} \;
