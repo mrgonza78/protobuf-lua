@@ -26,7 +26,8 @@ local containers = {}
 
 local _RCFC_meta = {
   add = function(self)
-    local value = self._message_descriptor._concrete_class()
+    local message_descriptor = self._message_descriptor
+    local value = (message_descriptor._concrete_class and message_descriptor._concrete_class()) or message_descriptor()
     local listener = self._listener
     rawset(self, #self + 1, value)
     value:_SetListener(listener)
