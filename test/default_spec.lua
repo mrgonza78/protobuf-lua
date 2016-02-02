@@ -104,3 +104,33 @@ describe("Embed", function()
   end)
 end)
 
+describe("MultiRepeated", function()
+  local multi
+
+  setup(function()
+    local msg = test_pb.MultiRepeated()
+
+    local val1 = msg.values:add()
+    val1.floatValues:append(1.2345)
+    val1.doubleValues:append(1.2345)
+    val1.int32Values:append(1)
+
+    local val2 = msg.values:add()
+    val2.floatValues:append(2.2345)
+    val2.doubleValues:append(2.2345)
+    val2.int32Values:append(2)
+
+    multi = reserialize(test_pb.MultiRepeated, msg)
+  end)
+
+  it("tests message with repeated message with repeated values", function()
+    assert.are.equal(string.format("%.4f", multi.values[1].doubleValues[1]), string.format("%.4f", 1.2345))
+    assert.are.equal(multi.values[1].doubleValues[1], 1.2345)
+    assert.are.equal(multi.values[1].int32Values[1], 1)
+
+    assert.are.equal(string.format("%.4f", multi.values[2].doubleValues[1]), string.format("%.4f", 2.2345))
+    assert.are.equal(multi.values[2].doubleValues[1], 2.2345)
+    assert.are.equal(multi.values[2].int32Values[1], 2)
+  end)
+end)
+

@@ -15,7 +15,6 @@ message ScalarTypes {
     optional string string = 13;
     optional bytes bytes = 14;
     optional float float = 15;
-    repeated float r_floats = 16 [packed=true];
 }
 
 enum Enum {
@@ -44,3 +43,15 @@ message Embedded {
 message Embed {
     required Embedded embedded = 1;
 }
+
+message MultiRepeated {
+    repeated RepeatedValues values = 1;
+}
+
+message RepeatedValues {
+    repeated float floatValues = 1 [packed=true];
+    repeated double doubleValues = 2 [packed=true];
+    repeated int32 int32Values = 3 [packed=true];
+}
+
+

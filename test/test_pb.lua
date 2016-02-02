@@ -22,7 +22,6 @@ module.SCALARTYPES_BOOL_FIELD = protobuf.FieldDescriptor()
 module.SCALARTYPES_STRING_FIELD = protobuf.FieldDescriptor()
 module.SCALARTYPES_BYTES_FIELD = protobuf.FieldDescriptor()
 module.SCALARTYPES_FLOAT_FIELD = protobuf.FieldDescriptor()
-module.SCALARTYPES_R_FLOATS_FIELD = protobuf.FieldDescriptor()
 module.ENUMS = protobuf.Descriptor()
 module.ENUMS_ENUM_FIELD = protobuf.FieldDescriptor()
 module.EXTENDED = protobuf.Descriptor()
@@ -33,6 +32,12 @@ module.EMBEDDED = protobuf.Descriptor()
 module.EMBEDDED_VALUE_FIELD = protobuf.FieldDescriptor()
 module.EMBED = protobuf.Descriptor()
 module.EMBED_EMBEDDED_FIELD = protobuf.FieldDescriptor()
+module.MULTIREPEATED = protobuf.Descriptor()
+module.MULTIREPEATED_VALUES_FIELD = protobuf.FieldDescriptor()
+module.REPEATEDVALUES = protobuf.Descriptor()
+module.REPEATEDVALUES_FLOATVALUES_FIELD = protobuf.FieldDescriptor()
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD = protobuf.FieldDescriptor()
+module.REPEATEDVALUES_INT32VALUES_FIELD = protobuf.FieldDescriptor()
 
 module.ENUM_SOMETHING_ENUM.name = 'SOMETHING'
 module.ENUM_SOMETHING_ENUM.index = 0
@@ -196,21 +201,11 @@ module.SCALARTYPES_FLOAT_FIELD.default_value = 0.0
 module.SCALARTYPES_FLOAT_FIELD.type = 2
 module.SCALARTYPES_FLOAT_FIELD.cpp_type = 6
 
-module.SCALARTYPES_R_FLOATS_FIELD.name = 'r_floats'
-module.SCALARTYPES_R_FLOATS_FIELD.full_name = '.ScalarTypes.r_floats'
-module.SCALARTYPES_R_FLOATS_FIELD.number = 16
-module.SCALARTYPES_R_FLOATS_FIELD.index = 15
-module.SCALARTYPES_R_FLOATS_FIELD.label = 3
-module.SCALARTYPES_R_FLOATS_FIELD.has_default_value = false
-module.SCALARTYPES_R_FLOATS_FIELD.default_value = {}
-module.SCALARTYPES_R_FLOATS_FIELD.type = 2
-module.SCALARTYPES_R_FLOATS_FIELD.cpp_type = 6
-
 module.SCALARTYPES.name = 'ScalarTypes'
 module.SCALARTYPES.full_name = '.ScalarTypes'
 module.SCALARTYPES.nested_types = {}
 module.SCALARTYPES.enum_types = {}
-module.SCALARTYPES.fields = {module.SCALARTYPES_DOUBLE_FIELD, module.SCALARTYPES_INT32_FIELD, module.SCALARTYPES_INT64_FIELD, module.SCALARTYPES_UINT32_FIELD, module.SCALARTYPES_UINT64_FIELD, module.SCALARTYPES_SINT32_FIELD, module.SCALARTYPES_SINT64_FIELD, module.SCALARTYPES_FIXED32_FIELD, module.SCALARTYPES_FIXED64_FIELD, module.SCALARTYPES_SFIXED32_FIELD, module.SCALARTYPES_SFIXED64_FIELD, module.SCALARTYPES_BOOL_FIELD, module.SCALARTYPES_STRING_FIELD, module.SCALARTYPES_BYTES_FIELD, module.SCALARTYPES_FLOAT_FIELD, module.SCALARTYPES_R_FLOATS_FIELD}
+module.SCALARTYPES.fields = {module.SCALARTYPES_DOUBLE_FIELD, module.SCALARTYPES_INT32_FIELD, module.SCALARTYPES_INT64_FIELD, module.SCALARTYPES_UINT32_FIELD, module.SCALARTYPES_UINT64_FIELD, module.SCALARTYPES_SINT32_FIELD, module.SCALARTYPES_SINT64_FIELD, module.SCALARTYPES_FIXED32_FIELD, module.SCALARTYPES_FIXED64_FIELD, module.SCALARTYPES_SFIXED32_FIELD, module.SCALARTYPES_SFIXED64_FIELD, module.SCALARTYPES_BOOL_FIELD, module.SCALARTYPES_STRING_FIELD, module.SCALARTYPES_BYTES_FIELD, module.SCALARTYPES_FLOAT_FIELD}
 module.SCALARTYPES.is_extendable = false
 module.SCALARTYPES.extensions = {}
 module.ENUMS_ENUM_FIELD.name = 'enum'
@@ -301,6 +296,61 @@ module.EMBED.enum_types = {}
 module.EMBED.fields = {module.EMBED_EMBEDDED_FIELD}
 module.EMBED.is_extendable = false
 module.EMBED.extensions = {}
+module.MULTIREPEATED_VALUES_FIELD.name = 'values'
+module.MULTIREPEATED_VALUES_FIELD.full_name = '.MultiRepeated.values'
+module.MULTIREPEATED_VALUES_FIELD.number = 1
+module.MULTIREPEATED_VALUES_FIELD.index = 0
+module.MULTIREPEATED_VALUES_FIELD.label = 3
+module.MULTIREPEATED_VALUES_FIELD.has_default_value = false
+module.MULTIREPEATED_VALUES_FIELD.default_value = {}
+module.MULTIREPEATED_VALUES_FIELD.message_type = module.REPEATEDVALUES
+module.MULTIREPEATED_VALUES_FIELD.type = 11
+module.MULTIREPEATED_VALUES_FIELD.cpp_type = 10
+
+module.MULTIREPEATED.name = 'MultiRepeated'
+module.MULTIREPEATED.full_name = '.MultiRepeated'
+module.MULTIREPEATED.nested_types = {}
+module.MULTIREPEATED.enum_types = {}
+module.MULTIREPEATED.fields = {module.MULTIREPEATED_VALUES_FIELD}
+module.MULTIREPEATED.is_extendable = false
+module.MULTIREPEATED.extensions = {}
+module.REPEATEDVALUES_FLOATVALUES_FIELD.name = 'floatValues'
+module.REPEATEDVALUES_FLOATVALUES_FIELD.full_name = '.RepeatedValues.floatValues'
+module.REPEATEDVALUES_FLOATVALUES_FIELD.number = 1
+module.REPEATEDVALUES_FLOATVALUES_FIELD.index = 0
+module.REPEATEDVALUES_FLOATVALUES_FIELD.label = 3
+module.REPEATEDVALUES_FLOATVALUES_FIELD.has_default_value = false
+module.REPEATEDVALUES_FLOATVALUES_FIELD.default_value = {}
+module.REPEATEDVALUES_FLOATVALUES_FIELD.type = 2
+module.REPEATEDVALUES_FLOATVALUES_FIELD.cpp_type = 6
+
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.name = 'doubleValues'
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.full_name = '.RepeatedValues.doubleValues'
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.number = 2
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.index = 1
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.label = 3
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.has_default_value = false
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.default_value = {}
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.type = 1
+module.REPEATEDVALUES_DOUBLEVALUES_FIELD.cpp_type = 5
+
+module.REPEATEDVALUES_INT32VALUES_FIELD.name = 'int32Values'
+module.REPEATEDVALUES_INT32VALUES_FIELD.full_name = '.RepeatedValues.int32Values'
+module.REPEATEDVALUES_INT32VALUES_FIELD.number = 3
+module.REPEATEDVALUES_INT32VALUES_FIELD.index = 2
+module.REPEATEDVALUES_INT32VALUES_FIELD.label = 3
+module.REPEATEDVALUES_INT32VALUES_FIELD.has_default_value = false
+module.REPEATEDVALUES_INT32VALUES_FIELD.default_value = {}
+module.REPEATEDVALUES_INT32VALUES_FIELD.type = 5
+module.REPEATEDVALUES_INT32VALUES_FIELD.cpp_type = 1
+
+module.REPEATEDVALUES.name = 'RepeatedValues'
+module.REPEATEDVALUES.full_name = '.RepeatedValues'
+module.REPEATEDVALUES.nested_types = {}
+module.REPEATEDVALUES.enum_types = {}
+module.REPEATEDVALUES.fields = {module.REPEATEDVALUES_FLOATVALUES_FIELD, module.REPEATEDVALUES_DOUBLEVALUES_FIELD, module.REPEATEDVALUES_INT32VALUES_FIELD}
+module.REPEATEDVALUES.is_extendable = false
+module.REPEATEDVALUES.extensions = {}
 
 module.Embed = protobuf.Message(module.EMBED)
 module.Embedded = protobuf.Message(module.EMBEDDED)
@@ -311,11 +361,13 @@ module.Enum.SOMETHING_ELSE = 1
 module.Enums = protobuf.Message(module.ENUMS)
 module.Extended = protobuf.Message(module.EXTENDED)
 module.Extension = protobuf.Message(module.EXTENSION)
+module.MultiRepeated = protobuf.Message(module.MULTIREPEATED)
+module.RepeatedValues = protobuf.Message(module.REPEATEDVALUES)
 module.ScalarTypes = protobuf.Message(module.SCALARTYPES)
 
 module.Extended.RegisterExtension(module.EXTENSION_EXTS_FIELD)
 
-module.MESSAGE_TYPES = {'ScalarTypes','Enums','Extended','Extension','Embedded','Embed'}
+module.MESSAGE_TYPES = {'ScalarTypes','Enums','Extended','Extension','Embedded','Embed','MultiRepeated','RepeatedValues'}
 module.ENUM_TYPES = {'Enum'}
 
 return module
