@@ -21,10 +21,9 @@ local table = table
 local ipairs = ipairs
 local assert = assert
 
-local struct = require "protobuf.struct"
+local pb = require "protobuf.pb"
 local wire_format = require "protobuf.wire_format"
 
--- @module protobuf.encoder
 local encoder = {}
 
 local function _VarintSize(value)
@@ -296,6 +295,7 @@ end
 
 local function _StructPackEncoder(wire_type, value_size, format)
   return function(field_number, is_repeated, is_packed)
+    local struct_pack = pb.struct_pack
     if is_packed then
       local tag_bytes = encoder.TagBytes(field_number, wire_format.WIRETYPE_LENGTH_DELIMITED)
       local EncodeVarint = _EncodeVarint
@@ -303,7 +303,7 @@ local function _StructPackEncoder(wire_type, value_size, format)
         write(tag_bytes)
         EncodeVarint(write, #value * value_size)
         for _, element in ipairs(value) do
-          struct.pack(write, format, element)
+          struct_pack(write, format, element)
         end
       end
     elseif is_repeated then
@@ -311,14 +311,14 @@ local function _StructPackEncoder(wire_type, value_size, format)
       return function (write, value)
         for _, element in ipairs(value) do
           write(tag_bytes)
-          struct.pack(write, format, element)
+          struct_pack(write, format, element)
         end
       end
     else
       local tag_bytes = encoder.TagBytes(field_number, wire_type)
       return function (write, value)
         write(tag_bytes)
-        struct.pack(write, format, value)
+        struct_pack(write, format, value)
       end
     end
   end

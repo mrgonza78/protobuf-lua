@@ -18,7 +18,6 @@
 
 local pb = require "protobuf.pb"
 
---- @module protobuf.wire_format
 local wire_format = {}
 
 wire_format.WIRETYPE_VARINT = 0

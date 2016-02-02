@@ -16,7 +16,6 @@
 --------------------------------------------------------------------------------
 --
 
--- @module protobuf.descriptor
 local descriptor = {}
 
 descriptor.FieldDescriptor = {

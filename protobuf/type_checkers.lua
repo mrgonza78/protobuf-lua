@@ -20,7 +20,6 @@ local type = type
 local error = error
 local string = string
 
---- @module protobuf.type_checkers
 local type_checkers = {}
 
 function type_checkers.TypeChecker(acceptable_types)
@@ -57,37 +56,6 @@ function type_checkers.Uint32ValueChecker()
                           proposed_value, type(proposed_value)))
     end
     if _MIN > proposed_value or proposed_value > _MAX then
-      error('Value out of range: ' .. proposed_value)
-    end
-  end
-end
-
-function type_checkers.Int64ValueChecker()
-  local _MIN = -9223372036854775808
-  local _MAX = 9223372036854775807
-  return function(proposed_value)
-    if type(proposed_value) ~= 'number' then
-      error(string.format('%s has type %s, but expected one of: number',
-                          proposed_value, type(proposed_value)))
-    end
-    if _MIN > proposed_value or proposed_value > _MAX then
-      error('Value out of range: ' .. proposed_value)
-    end
-  end
-end
-
-function type_checkers.Uint64ValueChecker()
-  local _MIN = 0
-  -- note: lua 5.3 64-bit integers are signed. this effectively limits
-  -- the range to 0 - 2^63
-  local _MAX = 0xfffffffffffffff
-  return function(proposed_value)
-    if type(proposed_value) ~= 'number' then
-      error(string.format('%s has type %s, but expected one of: number',
-                          proposed_value, type(proposed_value)))
-    end
-    if _MIN > proposed_value or proposed_value > _MAX then
-      print("MAX: ", _MAX)
       error('Value out of range: ' .. proposed_value)
     end
   end

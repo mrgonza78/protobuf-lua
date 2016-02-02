@@ -13,7 +13,9 @@ message ScalarTypes {
     optional sfixed64 sfixed64 = 11;
     optional bool bool = 12;
     optional string string = 13;
-    optional bytes bytes= 14;
+    optional bytes bytes = 14;
+    optional float float = 15;
+    repeated float r_floats = 16 [packed=true];
 }
 
 enum Enum {

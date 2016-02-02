@@ -26,7 +26,6 @@ local tostring = tostring
 
 local descriptor = require "protobuf.descriptor"
 
--- @module protobuf.text_format
 local text_format = {}
 
 function text_format.format(buffer)

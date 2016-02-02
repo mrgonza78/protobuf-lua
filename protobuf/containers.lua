@@ -21,7 +21,6 @@ local table = table
 local rawset = rawset
 local error = error
 
--- @module protobuf.containers
 local containers = {}
 
 local _RCFC_meta = {
@@ -62,11 +61,13 @@ local _RSFC_meta = {
     self._type_checker(value)
     rawset(self, #self + 1, value)
     self._listener:Modified()
-    end,
+  end,
+
   remove = function(self, key)
     table.remove(self, key)
     self._listener:Modified()
   end,
+
   __newindex = function(self, key, value)
     error("RepeatedCompositeFieldContainer Can't set value directly")
   end

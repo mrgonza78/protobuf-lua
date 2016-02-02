@@ -13,38 +13,40 @@ describe("ScalarTypes", function()
 
   setup(function()
     local msg = test_pb.ScalarTypes()
-    msg.double = 123.456
-    msg.int32 = 4452
-    msg.int64 = 123234234234
-    msg.uint32 = 1232342334
-    msg.uint64 = 123234234234
-    msg.sint32 = -4452
-    msg.sint64 = -123234234234
-    msg.fixed32 = 268435457
-    msg.fixed64 = 72057594037927937
-    msg.sfixed32 = -268435457
-    msg.sfixed64 = -72057594037927937
-    msg.bool = true
-    msg.string = "hello" 
-    msg.bytes = "\xF0\x9F\x98\x81"
-    scalar = reserialize(test_pb.ScalarTypes, msg) 
+    msg.double    = 123.456
+    msg.int32     = 4452
+    msg.int64     = 1232342342
+    msg.uint32    = 1232342334
+    msg.uint64    = 1232342342
+    msg.sint32    = -4452
+    msg.sint64    = -123234234
+    msg.fixed32   = 268435457
+    msg.fixed64   = 720575940
+    msg.sfixed32  = -268435457
+    msg.sfixed64  = -720575940
+    msg.bool      = true
+    msg.string    = "hello"
+    msg.bytes     = "\xF0\x9F\x98\x81"
+    msg.float     = 1.2345
+    scalar = reserialize(test_pb.ScalarTypes, msg)
   end)
 
   it("tests scalar serialization", function()
-    assert.are.equal(scalar.double, 123.456)
-    assert.are.equal(scalar.int32, 4452)
-    assert.are.equal(scalar.int64, 123234234234)
-    assert.are.equal(scalar.uint32, 1232342334)
-    assert.are.equal(scalar.uint64, 123234234234)
-    assert.are.equal(scalar.sint32, -4452)
-    assert.are.equal(scalar.sint64, -123234234234)
-    assert.are.equal(scalar.fixed32, 268435457)
-    assert.are.equal(scalar.fixed64, 72057594037927937)
-    assert.are.equal(scalar.sfixed32,  -268435457)
-    assert.are.equal(scalar.sfixed64, -72057594037927937)
+    assert.are.equal(scalar.double,   123.456)
+    assert.are.equal(scalar.int32,    4452)
+    assert.are.equal(scalar.int64,    1232342342)
+    assert.are.equal(scalar.uint32,   1232342334)
+    assert.are.equal(scalar.uint64,   1232342342)
+    assert.are.equal(scalar.sint32,   -4452)
+    assert.are.equal(scalar.sint64,   -123234234)
+    assert.are.equal(scalar.fixed32,  268435457)
+    assert.are.equal(scalar.fixed64,  720575940)
+    assert.are.equal(scalar.sfixed32, -268435457)
+    assert.are.equal(scalar.sfixed64, -720575940)
     assert.is_true(scalar.bool)
     assert.are.equal(scalar.string, "hello")
     assert.are.equal(scalar.bytes, "\xF0\x9F\x98\x81")
+    assert.are.equal(string.format("%.4f", scalar.float), string.format("%.4f", 1.2345))
   end)
 end)
 

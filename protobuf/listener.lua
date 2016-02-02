@@ -18,7 +18,6 @@
 
 local setmetatable = setmetatable
 
--- @module protobuf.listener
 local listener = {}
 
 local _null_listener = {
