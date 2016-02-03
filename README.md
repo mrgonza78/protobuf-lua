@@ -2,15 +2,18 @@ protobuf-lua
 ============
 
 Lua library for Google's [Protocol Buffers](http://code.google.com/p/protobuf/).
-This is a fork of https://github.com/sean-lin/protoc-gen-lua
 
-## Installation and Usage
+## Instalation and usage
 
-Using luarocks by running: ```luarocks install protobuf```
+If you wanna use this fork in luarocks, user following command:
+
+```
+luarocks install https://raw.githubusercontent.com/concreteinteractive/protobuf-lua/master/protobuf-scm-1.rockspec
+```
 
 Make a link to the protoc plugin, for example:
 
-```ln -s /usr/local/lib/luarocks/rocks/protobuf/1.1.0-0/protoc-plugin/protoc-gen-lua /usr/local/bin/```
+```ln -s $(luarocks config --lua-libdir)/luarocks/rocks/protobuf/scm-1/protoc-plugin/protoc-gen-lua /usr/local/bin/```
 
 proto files can then be compiled using: ```protoc --lua_out=./ foo.proto```
 
