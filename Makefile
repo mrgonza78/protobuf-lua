@@ -9,7 +9,7 @@ all: build
 
 rockspec:
 	mkdir -p $(OUTPUTDIR)
-	sed "s/%VERSION%/$(VERSION)/g" protobuf.rockspec > $(OUTPUTDIR)/$(NAME).rockspec
+	sed "s/%VERSION%/$(VERSION)/g" protobuf.rockspec.tpl > $(OUTPUTDIR)/$(NAME).rockspec
 
 build: rockspec
 	mkdir -p $(OUTPUTDIR)/protobuf
