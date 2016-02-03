@@ -1,6 +1,5 @@
 *.pyc
 *.o
 *.so
-*.rockspec
 *.rock
 tree
