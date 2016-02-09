@@ -23,6 +23,7 @@ build = {
     ["protobuf.wire_format"] = "protobuf/wire_format.lua",
     ["protobuf.listener"] = "protobuf/listener.lua",
     ["protobuf.type_checkers"] = "protobuf/type_checkers.lua",
+    ["protobuf.helper"] = "protobuf/helper.lua",
     ["protobuf.pb"] = { sources = { "protobuf/pb.c" } }
   },
   copy_directories = {"protoc-plugin"}
