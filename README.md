@@ -5,6 +5,8 @@ Lua library for Google's [Protocol Buffers](http://code.google.com/p/protobuf/).
 
 ## Instalation and usage
 
+Make sure you have `pip` installed (`sudo easy_install pip`) and install `protobuf` package (`sudo pip install protobuf`)
+
 If you wanna use this fork in luarocks, user following command:
 
 ```
