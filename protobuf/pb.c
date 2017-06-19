@@ -21,6 +21,7 @@
  */
 #include <stdint.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include <lua.h>
 #include <lualib.h>
@@ -86,17 +87,17 @@ static void pack_varint(luaL_Buffer *b, uint64_t value)
                                     {
                                         luaL_addchar(b, value | 0x80);
                                         value >>= 7;
-                                    } 
-                                } 
-                            } 
-                        } 
-                    } 
-                } 
-            } 
-        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     luaL_addchar(b, value);
-} 
+}
 
 static int varint_encoder(lua_State *L)
 {
@@ -105,7 +106,23 @@ static int varint_encoder(lua_State *L)
 
     luaL_Buffer b;
     luaL_buffinit(L, &b);
-    
+
+    pack_varint(&b, value);
+
+    lua_settop(L, 1);
+    luaL_pushresult(&b);
+    lua_call(L, 1, 0);
+    return 0;
+}
+
+static int string_to_varint_encoder(lua_State *L){
+    const char *str_value = luaL_checkstring(L, 2);
+
+    uint64_t value = strtoull(str_value,NULL,10);
+
+    luaL_Buffer b;
+    luaL_buffinit(L, &b);
+
     pack_varint(&b, value);
 
     lua_settop(L, 1);
@@ -118,7 +135,7 @@ static int signed_varint_encoder(lua_State *L)
 {
     lua_Integer l_value = luaL_checkinteger(L, 2);
     int64_t value = (int64_t)l_value;
-    
+
     luaL_Buffer b;
     luaL_buffinit(L, &b);
 
@@ -128,7 +145,7 @@ static int signed_varint_encoder(lua_State *L)
     }else{
         pack_varint(&b, value);
     }
-    
+
     lua_settop(L, 1);
     luaL_pushresult(&b);
     lua_call(L, 1, 0);
@@ -245,13 +262,34 @@ static int varint_decoder(lua_State *L)
     size_t len;
     const char* buffer = luaL_checklstring(L, 1, &len);
     size_t pos = luaL_checkinteger(L, 2);
-    
+
     buffer += pos;
     len = size_varint(buffer, len);
     if(len == -1){
         luaL_error(L, "error data %s, len:%d", buffer, len);
     }else{
         lua_pushinteger(L, (lua_Integer)unpack_varint(buffer, len));
+        lua_pushinteger(L, len + pos);
+    }
+    return 2;
+}
+
+static int varint_to_string_decoder(lua_State *L)
+{
+    size_t len;
+    const char* buffer = luaL_checklstring(L, 1, &len);
+    size_t pos = luaL_checkinteger(L, 2);
+
+    buffer += pos;
+    len = size_varint(buffer, len);
+    if(len == -1){
+        luaL_error(L, "error data %s, len:%d", buffer, len);
+    }else{
+        uint64_t value = unpack_varint(buffer, len);
+        char str_value[21]; // length of 2**64 - 1, +1 for nul.
+        sprintf(str_value, "%llu", value);
+
+        lua_pushstring(L,str_value);
         lua_pushinteger(L, len + pos);
     }
     return 2;
@@ -264,7 +302,7 @@ static int signed_varint_decoder(lua_State *L)
     size_t pos = luaL_checkinteger(L, 2);
     buffer += pos;
     len = size_varint(buffer, len);
-    
+
     if(len == -1){
         luaL_error(L, "error data %s, len:%d", buffer, len);
     }else{
@@ -311,7 +349,7 @@ static int read_tag(lua_State *L)
     size_t len;
     const char* buffer = luaL_checklstring(L, 1, &len);
     size_t pos = luaL_checkinteger(L, 2);
-    
+
     buffer += pos;
     len = size_varint(buffer, len);
     if(len == -1){
@@ -395,7 +433,7 @@ static int iostring_new(lua_State* L)
     io->size = 0;
 
     luaL_getmetatable(L, IOSTRING_META);
-    lua_setmetatable(L, -2); 
+    lua_setmetatable(L, -2);
     return 1;
 }
 
@@ -443,16 +481,18 @@ static int iostring_sub(lua_State* L)
 static int iostring_clear(lua_State* L)
 {
     IOString *io = checkiostring(L);
-    io->size = 0; 
+    io->size = 0;
     return 0;
 }
 
 static const struct luaL_Reg _pb [] = {
+    {"string_to_varint_encoder", string_to_varint_encoder},
     {"varint_encoder", varint_encoder},
     {"signed_varint_encoder", signed_varint_encoder},
     {"read_tag", read_tag},
     {"struct_pack", struct_pack},
     {"struct_unpack", struct_unpack},
+    {"varint_to_string_decoder", varint_to_string_decoder},
     {"varint_decoder", varint_decoder},
     {"signed_varint_decoder", signed_varint_decoder},
     {"zig_zag_decode32", zig_zag_decode32},

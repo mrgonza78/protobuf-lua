@@ -211,6 +211,7 @@ end
 
 local _EncodeVarint = pb.varint_encoder
 local _EncodeSignedVarint = pb.signed_varint_encoder
+local _EncodeStringToVarint = pb.string_to_varint_encoder
 
 local function _VarintBytes(value)
   local out = {}
@@ -329,7 +330,8 @@ encoder.Int64Encoder = encoder.Int32Encoder
 encoder.EnumEncoder = encoder.Int32Encoder
 
 encoder.UInt32Encoder = _SimpleEncoder(wire_format.WIRETYPE_VARINT, _EncodeVarint, _VarintSize)
-encoder.UInt64Encoder = encoder.UInt32Encoder
+-- encoder.UInt64Encoder = encoder.UInt32Encoder
+encoder.UInt64Encoder = _SimpleEncoder(wire_format.WIRETYPE_VARINT, _EncodeStringToVarint, _VarintSize)
 
 encoder.SInt32Encoder = _ModifiedEncoder(
   wire_format.WIRETYPE_VARINT, _EncodeVarint, _VarintSize,

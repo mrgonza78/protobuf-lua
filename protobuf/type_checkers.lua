@@ -61,6 +61,11 @@ function type_checkers.Uint32ValueChecker()
   end
 end
 
+function type_checkers.NullValueChecker()
+  return function(...)
+  end
+end
+
 function type_checkers.UnicodeValueChecker()
   return function (proposed_value)
     if type(proposed_value) ~= 'string' then

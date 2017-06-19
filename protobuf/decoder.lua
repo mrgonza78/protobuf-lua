@@ -31,6 +31,7 @@ local decoder = {}
 
 local _DecodeVarint = pb.varint_decoder
 local _DecodeSignedVarint = pb.signed_varint_decoder
+local _DecodeVarintToString = pb.varint_to_string_decoder
 
 local _DecodeVarint32 = pb.varint_decoder
 local _DecodeSignedVarint32 = pb.signed_varint_decoder
@@ -127,7 +128,7 @@ decoder.EnumDecoder = decoder.Int32Decoder
 decoder.Int64Decoder = _SimpleDecoder(wire_format.WIRETYPE_VARINT, _DecodeSignedVarint)
 
 decoder.UInt32Decoder = _SimpleDecoder(wire_format.WIRETYPE_VARINT, _DecodeVarint32)
-decoder.UInt64Decoder = _SimpleDecoder(wire_format.WIRETYPE_VARINT, _DecodeVarint)
+decoder.UInt64Decoder = _SimpleDecoder(wire_format.WIRETYPE_VARINT, _DecodeVarintToString)
 
 decoder.SInt32Decoder = _ModifiedDecoder(wire_format.WIRETYPE_VARINT, _DecodeVarint32, wire_format.ZigZagDecode32)
 decoder.SInt64Decoder = _ModifiedDecoder(wire_format.WIRETYPE_VARINT, _DecodeVarint, wire_format.ZigZagDecode64)
