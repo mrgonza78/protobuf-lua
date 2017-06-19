@@ -1,11 +1,12 @@
 package = "protobuf"
 version = "scm-1"
 source = {
-  url = "git://github.com/concreteinteractive/protobuf-lua.git"
+  url = "git://github.com/mrgonza78/protobuf-lua.git",
+  tag = "v1.1.2",
 }
 description = {
   summary = "Protobuf library and compiler plugin",
-  homepage = "https://github.com/concreteinteractive/protobuf-lua",
+  homepage = "https://github.com/mrgonza78/protobuf-lua",
   license = "MIT"
 }
 dependencies = {

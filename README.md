@@ -10,7 +10,7 @@ Make sure you have `pip` installed (`sudo easy_install pip`) and install `protob
 If you wanna use this fork in luarocks, user following command:
 
 ```
-luarocks install https://raw.githubusercontent.com/concreteinteractive/protobuf-lua/master/protobuf-scm-1.rockspec
+luarocks install https://raw.githubusercontent.com/mrgonza78/protobuf-lua/master/protobuf-scm-1.rockspec
 ```
 
 Make a link to the protoc plugin, for example:
