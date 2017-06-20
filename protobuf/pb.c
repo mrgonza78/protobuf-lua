@@ -131,6 +131,25 @@ static int string_to_varint_encoder(lua_State *L){
     return 0;
 }
 
+static int string_varint_size(lua_State *L){
+    const char *str_value = luaL_checkstring(L, 1);
+    uint64_t value = strtoull(str_value,NULL,10);
+    uint32_t size  = 10;
+
+         if (value <= 0x7f) { size = 1; }
+    else if (value <= 0x3fff) { size = 2; }
+    else if (value <= 0x1fffff) { size = 3; }
+    else if (value <= 0xfffffff) { size = 4; }
+    else if (value <= 0x7ffffffff) { size = 5; }
+    else if (value <= 0x3ffffffffff) { size = 6; }
+    else if (value <= 0x1ffffffffffff) { size = 7; }
+    else if (value <= 0xffffffffffffff) { size = 8; }
+    else if (value <= 0x7fffffffffffffff) { size = 9; }
+
+    lua_pushinteger(L, size);
+    return 1;
+}
+
 static int signed_varint_encoder(lua_State *L)
 {
     lua_Integer l_value = luaL_checkinteger(L, 2);
@@ -486,6 +505,7 @@ static int iostring_clear(lua_State* L)
 }
 
 static const struct luaL_Reg _pb [] = {
+    {"string_varint_size", string_varint_size},
     {"string_to_varint_encoder", string_to_varint_encoder},
     {"varint_encoder", varint_encoder},
     {"signed_varint_encoder", signed_varint_encoder},

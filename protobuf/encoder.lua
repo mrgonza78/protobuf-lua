@@ -131,7 +131,7 @@ encoder.Int64Sizer = encoder.Int32Sizer
 encoder.EnumSizer = encoder.Int32Sizer
 
 encoder.UInt32Sizer = _SimpleSizer(_VarintSize)
-encoder.UInt64Sizer = encoder.UInt32Sizer
+encoder.UInt64Sizer = _SimpleSizer(pb.string_varint_size)
 
 encoder.SInt32Sizer = _ModifiedSizer(_SignedVarintSize, wire_format.ZigZagEncode)
 encoder.SInt64Sizer = encoder.SInt32Sizer
