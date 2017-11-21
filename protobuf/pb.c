@@ -27,6 +27,8 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
+#include <inttypes.h>
+
 #if defined(_ALLBSD_SOURCE) || defined(__APPLE__)
 #include <machine/endian.h>
 #else
@@ -306,7 +308,7 @@ static int varint_to_string_decoder(lua_State *L)
     }else{
         uint64_t value = unpack_varint(buffer, len);
         char str_value[21]; // length of 2**64 - 1, +1 for nul.
-        sprintf(str_value, "%llu", value);
+        sprintf(str_value, "%" PRId64, value);
 
         lua_pushstring(L,str_value);
         lua_pushinteger(L, len + pos);
@@ -527,7 +529,7 @@ static const struct luaL_Reg _pb [] = {
 /*
 ** Adapted from Lua 5.2.0
 */
-static void luaL_setfuncs (lua_State *L, const luaL_Reg *l, int nup) {
+static void setfuncs (lua_State *L, const luaL_Reg *l, int nup) {
   luaL_checkstack(L, nup+1, "too many upvalues");
   for (; l->name != NULL; l++) {  /* fill the table with given functions */
     int i;
@@ -555,10 +557,10 @@ int luaopen_protobuf_pb (lua_State *L)
     luaL_newmetatable(L, IOSTRING_META);
     lua_pushvalue(L, -1);
     lua_setfield(L, -2, "__index");
-    luaL_setfuncs(L, _c_iostring_m, 0);
+    setfuncs(L, _c_iostring_m, 0);
 
     lua_newtable(L);
-    luaL_setfuncs(L, _pb, 0);
+    setfuncs(L, _pb, 0);
     lua_pushvalue(L, -1);
     lua_setglobal(L, "pb");
 
