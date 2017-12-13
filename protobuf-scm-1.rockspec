@@ -1,5 +1,5 @@
 package = "protobuf"
-version = "ring-1.1.3"
+version = "1.1.3"
 source = {
   url = "git://github.com/mrgonza78/protobuf-lua.git",
   tag = "1.1.3",
