@@ -1,8 +1,8 @@
 package = "protobuf"
-version = "scm-1"
+version = "ring-1.1.3"
 source = {
   url = "git://github.com/mrgonza78/protobuf-lua.git",
-  tag = "v1.1.2",
+  tag = "1.1.3",
 }
 description = {
   summary = "Protobuf library and compiler plugin",
