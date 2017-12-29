@@ -26,6 +26,7 @@
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
+#include <inttypes.h>
 
 #if defined(_ALLBSD_SOURCE) || defined(__APPLE__)
 #include <machine/endian.h>
@@ -306,7 +307,7 @@ static int varint_to_string_decoder(lua_State *L)
     }else{
         uint64_t value = unpack_varint(buffer, len);
         char str_value[21]; // length of 2**64 - 1, +1 for nul.
-        sprintf(str_value, "%llu", value);
+        sprintf(str_value, "%" PRIu64, value);
 
         lua_pushstring(L,str_value);
         lua_pushinteger(L, len + pos);

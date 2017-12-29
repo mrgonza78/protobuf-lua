@@ -1,8 +1,8 @@
 package = "protobuf"
-version = "1.1.3-1"
+version = "1.1.4-1"
 source = {
   url = "git://github.com/mrgonza78/protobuf-lua.git",
-  tag = "1.1.3",
+  tag = "1.1.4",
 }
 description = {
   summary = "Protobuf library and compiler plugin",
