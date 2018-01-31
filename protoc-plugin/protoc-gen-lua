@@ -321,6 +321,7 @@ def code_gen_field(index, field_desc, env, includes):
 
     if field_desc.HasField('type_name'):
         type_name = env.get_ref_name(field_desc.type_name)
+        type_name = type_name.replace("/", "_")
         if not type_name.split('.')[0] in [filename+"_pb" for filename in includes]:
             type_name = type_name.upper().replace('.', '_')
         type_name = 'module.%s' % type_name.strip('_')
@@ -419,7 +420,7 @@ def code_gen_file(proto_file, env, is_gen):
         lua('local module = {}\n')
         lua('local protobuf = require \'protobuf\'\n')
         for i in includes:
-            lua('local %s_pb = require \'%s_pb\')\n' % (i, i))
+            lua('local %s_pb = require \'%s_pb\'\n' % (i.replace("/", "_"), i))
 
         lua('\n')
         map(lua, env.descriptor)
