@@ -43,7 +43,7 @@
 #define checkiostring(L) \
     (IOString*) luaL_checkudata(L, 1, IOSTRING_META)
 
-#define IOSTRING_BUF_LEN 65535
+#define IOSTRING_BUF_LEN 262144
 
 typedef struct{
     size_t size;
